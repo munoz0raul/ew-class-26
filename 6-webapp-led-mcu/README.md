@@ -48,6 +48,30 @@ vim 6-webapp-led-mcu.py
 ```
 [6-webapp-led-mcu.py](6-webapp-led-mcu.py)
 
+# WebApp LED (MCU + Sysfs)
+
+In this example, the web app controls both the system LEDs (sysfs) and the microcontroller LEDs through the Arduino Bridge. The Docker image uses a multi-stage build to compile and flash the MCU firmware before starting the Flask UI.
+
+## Getting Started
+
+### Create and Enter a Directory
+
+*Note: Run the following commands on the device*
+
+```sh
+device:~$ mkdir webapp-led-mcu
+device:~$ cd webapp-led-mcu
+```
+
+### Build the Flask App
+
+Start with the `6-webapp-led-mcu.py` file:
+
+```sh
+vim 6-webapp-led-mcu.py
+```
+[6-webapp-led-mcu.py](6-webapp-led-mcu.py)
+
 ### Create the HTML File
 
 ```sh
@@ -55,28 +79,20 @@ vim index.html
 ```
 [index.html](index.html)
 
-### Add the Logo Assets
+### Assets Folder
 
-These files are used in the header:
+All MCU and UI assets are grouped in `assets/`:
 
-- [arduino.png](arduino.png)
-- [edgeimpulse.png](edgeimpulse.png)
-- [foundries.png](foundries.png)
-- [qualcomm.png](qualcomm.png)
-
-### MCU Firmware Files
-
-The firmware is compiled and flashed during the Docker build/start:
-
-- [sketch.yaml](sketch.yaml)
-- [sketch.ino](sketch.ino)
-- [frames.h](frames.h)
-
-### OpenOCD and Board Files
-
-- [openocd/](openocd/)
-- [arduino.asc](arduino.asc)
-- [arduino.list](arduino.list)
+- [assets/arduino.png](assets/arduino.png)
+- [assets/edgeimpulse.png](assets/edgeimpulse.png)
+- [assets/foundries.png](assets/foundries.png)
+- [assets/qualcomm.png](assets/qualcomm.png)
+- [assets/sketch.yaml](assets/sketch.yaml)
+- [assets/sketch.ino](assets/sketch.ino)
+- [assets/frames.h](assets/frames.h)
+- [assets/arduino.asc](assets/arduino.asc)
+- [assets/arduino.list](assets/arduino.list)
+- [assets/openocd/](assets/openocd/)
 
 ### Start Script
 

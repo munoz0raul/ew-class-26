@@ -1,4 +1,4 @@
-FROM debian:trixie-slim AS builder
+FROM debian:trixie-slim
 
 #Install packages
 RUN apt-get update && \

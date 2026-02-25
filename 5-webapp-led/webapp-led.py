@@ -133,9 +133,10 @@ def index():
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    candidate = os.path.join(base_dir, filename)
+    assets_dir = os.path.join(base_dir, "assets")
+    candidate = os.path.join(assets_dir, filename)
     if os.path.exists(candidate):
-        return send_from_directory(base_dir, filename)
+        return send_from_directory(assets_dir, filename)
 
     sibling_dir = os.path.abspath(os.path.join(base_dir, "..", "class-voice-led-webui"))
     return send_from_directory(sibling_dir, filename)
@@ -145,7 +146,7 @@ def serve_static(filename):
     allowed = {"arduino.png", "edgeimpulse.png", "foundries.png", "qualcomm.png", "favicon.ico"}
     if filename in allowed:
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        return send_from_directory(base_dir, filename)
+        return send_from_directory(os.path.join(base_dir, "assets"), filename)
     return ("Not Found", 404)
 @app.route('/status')
 def status_stream():

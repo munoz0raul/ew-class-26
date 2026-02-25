@@ -1,4 +1,4 @@
-FROM debian:trixie-slim AS builder
+FROM debian:trixie-slim
 
 #Install packages
 RUN apt-get update && \
@@ -6,8 +6,10 @@ RUN apt-get update && \
         rm -rf /var/lib/apt/lists/*
 
 RUN pip install --break-system-packages flask flask_restful
+
 RUN mkdir -p /app/
 COPY webapp.py /app/
+
 WORKDIR /app/
 
 CMD ["python3", "webapp.py"]

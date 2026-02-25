@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  led-voice:
+    image: led-voice:latest
+    restart: unless-stopped
+    privileged: true
+    stdin_open: true     # -i
+    tty: true            # -t
+    group_add:
+      - "audio"
+    devices:
+      - "/dev/snd:/dev/snd"
+    environment:
+      THRESH: "0.70"
+      PA_ALSA_DEVICE: "0"

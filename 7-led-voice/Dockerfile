@@ -1,0 +1,42 @@
+FROM debian:trixie-slim
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y \
+        ca-certificates \
+        alsa-utils \
+        portaudio19-dev \
+        sox \
+        libasound2 \
+        libasound2-dev \
+        python3-pyaudio \
+        python3 python3-venv python3-dev python3-pip \
+        bash && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV VENV=/opt/venv
+RUN python3 -m venv $VENV
+ENV PATH="$VENV/bin:$PATH"
+
+RUN pip install --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir \
+        cbor \
+        edge_impulse_linux \
+        pyaudio \
+        six \
+        pyalsaaudio \
+        sounddevice \
+        numpy && \
+    rm -rf ~/.cache/pip
+
+RUN mkdir -p /app/
+
+COPY led-voice.py /app/
+COPY deployment.eim /app/
+RUN chmod +x /app/deployment.eim
+
+COPY start.sh /app/
+RUN chmod +x /app/start.sh
+WORKDIR /app
+
+CMD ["/app/start.sh"]

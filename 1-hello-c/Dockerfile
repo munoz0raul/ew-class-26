@@ -6,10 +6,13 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /app/
+
 COPY helloworld.c /app/
 COPY start.sh /app/
 RUN chmod +x /app/start.sh
+
 WORKDIR /app/
+
 RUN gcc helloworld.c -o helloworld
 
 ENTRYPOINT ["/app/start.sh"]

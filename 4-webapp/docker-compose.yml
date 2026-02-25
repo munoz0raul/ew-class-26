@@ -4,5 +4,5 @@ services:
   webapp:
     image: webapp:latest
     ports:
-      - "9900:9900"
+      - "8000:8000"
     restart: unless-stopped

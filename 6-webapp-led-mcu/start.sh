@@ -25,4 +25,4 @@ echo ">>> Activating virtualenv"
 source /opt/venv/bin/activate
 
 echo ">>> Running Python App..."
-python /app/6-webapp-led-mcu.py
+python /app/webapp-led-mcu.py

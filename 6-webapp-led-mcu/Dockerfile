@@ -1,8 +1,8 @@
 FROM debian:trixie-slim AS builder
 ENV DEBIAN_FRONTEND=noninteractive
 
-COPY arduino.asc /etc/apt/keyrings/arduino.asc
-COPY arduino.list /etc/apt/sources.list.d/arduino.list
+COPY assets/arduino.asc /etc/apt/keyrings/arduino.asc
+COPY assets/arduino.list /etc/apt/sources.list.d/arduino.list
 
 RUN chmod 644 /etc/apt/keyrings/arduino.asc
 
@@ -18,11 +18,12 @@ RUN apt-get update && \
 RUN arduino-cli core install arduino:zephyr -v
 
 RUN mkdir -p /app/sketch
-COPY sketch.yaml sketch.ino /app/sketch/
+COPY assets/sketch.yaml assets/sketch.ino assets/frames.h /app/sketch/
 
 RUN arduino-cli compile -b arduino:zephyr:unoq --output-dir "/app/sketch" "/app/sketch"
 
 FROM debian:trixie-slim
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -y \
@@ -35,20 +36,26 @@ RUN python3 -m venv $VENV
 ENV PATH="$VENV/bin:$PATH"
 
 RUN pip install --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir \
+        numpy \
+        watchdog \
+        flask && \
     pip install https://github.com/arduino/app-bricks-py/releases/download/release%2F0.5.0/arduino_app_bricks-0.5.0-py3-none-any.whl && \
-    pip install numpy watchdog flask
+    rm -rf ~/.cache/pip
 
+RUN mkdir -p /app/
 RUN mkdir -p /app/sketch
+
 # Copy compiled sketch from builder stage
 COPY --from=builder /app/sketch/*.elf-zsk.bin /app/sketch/
 COPY --from=builder /app/sketch/*.elf /app/sketch/
 
 # Copy application files
-COPY openocd /opt/openocd
+COPY assets/openocd /opt/openocd
 
-COPY 6-webapp-led-mcu.py /app/
+COPY webapp-led-mcu.py /app/
 COPY index.html /app/index.html
-COPY *.png /app/
+COPY assets/arduino.png assets/edgeimpulse.png assets/foundries.png assets/qualcomm.png /app/assets/
 
 COPY start.sh /app/
 RUN chmod +x /app/start.sh

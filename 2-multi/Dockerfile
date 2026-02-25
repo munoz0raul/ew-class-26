@@ -10,8 +10,8 @@ RUN mkdir -p /app/
 COPY helloworld.c /app/
 WORKDIR /app/
 RUN gcc helloworld.c -o helloworld
-RUN  echo "-------Final Stage--------------"
 
+RUN  echo "-------Final Stage--------------"
 FROM debian:trixie-slim AS final-stage
 
 #Install packages for the final stage

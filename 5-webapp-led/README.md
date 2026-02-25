@@ -43,10 +43,10 @@ vim index.html
 
 These files are used in the header:
 
-- [arduino.png](arduino.png)
-- [edgeimpulse.png](edgeimpulse.png)
-- [foundries.png](foundries.png)
-- [qualcomm.png](qualcomm.png)
+- [assets/arduino.png](assets/arduino.png)
+- [assets/edgeimpulse.png](assets/edgeimpulse.png)
+- [assets/foundries.png](assets/foundries.png)
+- [assets/qualcomm.png](assets/qualcomm.png)
 
 ### Create the Dockerfile
 
