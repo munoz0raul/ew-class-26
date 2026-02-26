@@ -64,14 +64,6 @@ LED_SET_2 = {
     "green": "/sys/class/leds/green:wlan/brightness",
     "red": "/sys/class/leds/red:panic/brightness",
 }
-TRIGGER_PATHS = (
-    "/sys/class/leds/blue:user/trigger",
-    "/sys/class/leds/green:user/trigger",
-    "/sys/class/leds/red:user/trigger",
-    "/sys/class/leds/blue:bt/trigger",
-    "/sys/class/leds/green:wlan/trigger",
-    "/sys/class/leds/red:panic/trigger",
-)
 
 # MCU LED states tracking (RGB LEDs)
 led_states = {
@@ -93,17 +85,6 @@ def _write_led(path: str, on: bool):
         if DEBUG:
             log(f"LED write failed {path}: {e}")
 
-def _disable_triggers():
-    for path in TRIGGER_PATHS:
-        try:
-            with open(path, "w") as f:
-                f.write("none")
-            if DEBUG:
-                log(f"LED trigger {path} -> none")
-        except Exception as e:
-            if DEBUG:
-                log(f"LED trigger failed {path}: {e}")
-
 def set_system_leds(color: str):
     mapping = {
         "blue": {"blue"},
@@ -114,7 +95,6 @@ def set_system_leds(color: str):
         "off": set(),
     }
     wanted = mapping.get((color or "").lower(), set())
-    _disable_triggers()
     for name in LED_NAMES:
         _write_led(LED_SET_1.get(name, ""), name in wanted)
         _write_led(LED_SET_2.get(name, ""), name in wanted)
@@ -199,9 +179,10 @@ def index():
 @app.route('/assets/<path:filename>')
 def serve_assets(filename):
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    candidate = os.path.join(base_dir, filename)
+    assets_dir = os.path.join(base_dir, "assets")
+    candidate = os.path.join(assets_dir, filename)
     if os.path.exists(candidate):
-        return send_from_directory(base_dir, filename)
+        return send_from_directory(assets_dir, filename)
 
     sibling_dir = os.path.abspath(os.path.join(base_dir, "..", "class-voice-led-webui"))
     return send_from_directory(sibling_dir, filename)
@@ -211,7 +192,7 @@ def serve_static(filename):
     allowed = {"arduino.png", "edgeimpulse.png", "foundries.png", "qualcomm.png", "favicon.ico"}
     if filename in allowed:
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        return send_from_directory(base_dir, filename)
+        return send_from_directory(os.path.join(base_dir, "assets"), filename)
     return ("Not Found", 404)
 @app.route('/status')
 def status_stream():
@@ -250,4 +231,4 @@ def api_color():
 if __name__ == '__main__':
     log("WebApp LED")
     set_led_color("off")
-    app.run(debug=False, host='0.0.0.0', port=9900, threaded=True)
+    app.run(debug=False, host='0.0.0.0', port=8000, threaded=True)

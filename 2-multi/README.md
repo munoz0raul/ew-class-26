@@ -72,14 +72,14 @@ device:~$ docker image ls
 
 Launch the container with -d to detach it and --name to specify a name.
 ```sh
-docker run -it --rm --name multi-stage -d multi-stage
+device:~$ docker run -it --rm --name multi-stage -d multi-stage
 ```
 
 Check for the running container:
 ```sh
-device:~$ docker ps
-CONTAINER ID   IMAGE         COMMAND           CREATED          STATUS          PORTS     NAMES
-f95415ab19d0   multi-stage   "/app/start.sh"   About a minute ago   Up About a minute             multi-stage
+docker ps
+CONTAINER ID   IMAGE            COMMAND           CREATED         STATUS         PORTS     NAMES
+5da7d6939de3   multi-stage      "/app/start.sh"   8 seconds ago   Up 6 seconds             multi-stage
 ```
 
 Now let’s jump inside the container and see what is installed there:
@@ -103,6 +103,11 @@ bash: type: gcc: not found
 Exit the container:
 ```sh
 docker:~$ exit
+```
+
+Remove the running docker:
+```sh
+docker:~$ docker rm -f multi-stage
 ```
 
 Return one folder:

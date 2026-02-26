@@ -2,7 +2,6 @@
 set -e
 
 SKETCH_DIR="/app/sketch"
-APP=${APP:-pingpong}
 
 # Verify if firmware is already flashed
 if /opt/openocd/bin/arduino-verify.sh; then
@@ -25,4 +24,4 @@ echo ">>> Activating virtualenv"
 source /opt/venv/bin/activate
 
 echo ">>> Running Python App..."
-python /app/7-webapp-led-mcu-voice.py
+python /app/webapp-led-mcu-voice.py

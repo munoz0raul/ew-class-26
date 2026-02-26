@@ -105,21 +105,22 @@ vim docker-compose.yml
 Running Docker Compose App
 ```sh
 device:~$ docker compose up -d
-[+] Building 0.0s (0/0)                                                                        
 [+] Running 1/1
- ✔ Container hello-c-hello-c-1  Started 
+ ✔ Container hello-c  Started 
 ```
 
 Check the running containers:
 ```sh
-device:~$ docker ps
-CONTAINER ID   IMAGE            COMMAND           CREATED              STATUS          PORTS     NAMES
-c0fee9005c0d   hello-c:latest   "/app/start.sh"   About a minute ago   Up 44 seconds             hello-c-hello-c-1
+device:~$ docker ps 
+CONTAINER ID   IMAGE            COMMAND           CREATED          STATUS          PORTS     NAMES
+786ddc3d8501   hello-c:latest   "/app/start.sh"   17 seconds ago   Up 15 seconds             hello-c
 ```
 
 Read the container logs:
 ```sh
-device:~$ docker logs c0fee9005c0d
+device:~$ docker logs hello-c
+hello, world!
+hello, world!
 hello, world!
 hello, world!
 hello, world!
@@ -135,9 +136,9 @@ The docker exec command executes a command within a running Docker container. It
 Before using docker exec, you need to know the name or ID of the running container. Use the following command to list all running containers:
 
 ```sh
-device:~$ docker ps
-CONTAINER ID   IMAGE            COMMAND           CREATED              STATUS         PORTS     NAMES
-beda4f352d11   hello-c:latest   "/app/start.sh"   About a minute ago   Up 9 seconds             hello-c-hello-c-1
+device:~$ docker ps 
+CONTAINER ID   IMAGE            COMMAND           CREATED          STATUS          PORTS     NAMES
+786ddc3d8501   hello-c:latest   "/app/start.sh"   17 seconds ago   Up 15 seconds             hello-c
 ```
 
 ### Access the Container's Shell
@@ -149,21 +150,32 @@ To access the container's terminal shell, use the -it flags with docker exec:
 Run the following command:
 
 ```sh
-device:~$ docker exec -it hello-c-hello-c-1 /bin/bash
+device:~$ docker exec -it hello-c /bin/bash
 ```
 
 Now inside the container, check the files installed inside the Docker Image:
 ```sh
 docker:~$ ls -l
--rwxr-xr-x 1 root root 70440 Feb 15 00:32 helloworld
--rw-r--r-- 1 root root    83 Feb 15 00:27 helloworld.c
--rwxr-xr-x 1 root root    55 Feb 15 00:28 start.sh
+total 24
+-rwxr-xr-x 1 root root 70440 Feb 25 16:33 helloworld
+-rw-r--r-- 1 root root    84 Feb 25 16:31 helloworld.c
+-rwxr-xr-x 1 root root    54 Feb 25 16:31 start.sh
 ```
 
 Check if gcc is installed inside the container:
 ```sh
 docker:~$ type gcc
 gcc is /usr/bin/gcc
+```
+
+Exit the container
+```sh
+docker:~$ exit
+```
+
+Remove the running docker:
+```sh
+docker:~$ docker rm -f hello-c
 ```
 
 Return one folder:

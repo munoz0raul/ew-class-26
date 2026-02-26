@@ -102,6 +102,8 @@ def _resolve_model_path(model: str) -> str:
 def _print_scores(labels, scores, total_ms: int):
     print(f"Result ({total_ms} ms.) ", end="")
     for label in labels:
+        if label not in COLORS:
+            continue
         score = scores.get(label, 0.0)
         print(f"{label}: {score:.2f}\t", end="")
     print("", flush=True)

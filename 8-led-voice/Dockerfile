@@ -5,11 +5,13 @@ RUN apt-get update && \
     apt-get install -y \
         ca-certificates \
         alsa-utils \
+        libgl1 \
+        libglib2.0-0 \
         portaudio19-dev \
+        python3-pyaudio \
         sox \
         libasound2 \
         libasound2-dev \
-        python3-pyaudio \
         python3 python3-venv python3-dev python3-pip \
         bash && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -22,6 +24,7 @@ RUN pip install --upgrade pip setuptools wheel && \
     pip install --no-cache-dir \
         cbor \
         edge_impulse_linux \
+        "opencv-python>=4.5.1.48,<5" \
         pyaudio \
         six \
         pyalsaaudio \

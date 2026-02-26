@@ -7,7 +7,7 @@ When running a Flask application inside a Docker container, we need to map the c
 Start by creating a new directory:
 
 > [!NOTE] 
-> Note: Run the following commands on the device
+> Run the following commands on the device
 
 ```sh
 device:~$ mkdir webapp
@@ -50,10 +50,10 @@ device:~$ docker image ls
 ```
 
 Launch the container with -d to detach it and --name to specify a name.
-Note that we are using -p to share the port 9900 from the docker with the host.
+Note that we are using -p to share the port 8000 from the docker with the host.
 
 ```sh
-device:~$ docker run -it -p 9900:9900 -d --rm --name webapp webapp
+device:~$ docker run -it --network host -d --rm --name webapp webapp
 d948ce65d5d7ffe6a214211e946ba939db7f05994191763bde82e4f5e0ad4a8a
 ```
 
@@ -69,18 +69,18 @@ device:~$ docker logs webapp
  * Debug mode: on
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
  * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:9900
- * Running on http://172.17.0.3:9900
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.15.14:8000
 Press CTRL+C to quit
  * Restarting with stat
  * Debugger is active!
- * Debugger PIN: 557-327-635
+ * Debugger PIN: 125-165-193
 ```
 
 Use your browser with the board IP to check the page result:
 
 ```sh
-host:~$ curl http://192.168.15.97:9900
+host:~$ curl http://192.168.15.14:8000
 Hello, World!
 ```
 
@@ -99,27 +99,33 @@ device:~$ docker stop webapp
 Running Docker Compose App:
 ```sh
 device:~$ docker compose up
-[+] Building 0.0s (0/0)                                                                        
-[+] Running 2/2
- ✔ Network flask_default     Created                                                      0.2s 
- ✔ Container flask-webapp-1  Created                                                      0.1s 
-Attaching to flask-webapp-1
-flask-webapp-1  |  * Serving Flask app 'webapp'
-flask-webapp-1  |  * Debug mode: on
-flask-webapp-1  | WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
-flask-webapp-1  |  * Running on all addresses (0.0.0.0)
-flask-webapp-1  |  * Running on http://127.0.0.1:9900
-flask-webapp-1  |  * Running on http://172.19.0.2:9900
-flask-webapp-1  | Press CTRL+C to quit
-flask-webapp-1  |  * Restarting with stat
-flask-webapp-1  |  * Debugger is active!
-flask-webapp-1  |  * Debugger PIN: 125-324-034
-flask-webapp-1  | 192.168.15.14 - - [16/Feb/2025 00:21:38] "GET / HTTP/1.1" 200 -
+[+] Running 0/1
+ ⠹ Container 4-webapp-webapp-1  Recreated                                                                                                                               0.2s 
+Attaching to webapp
+webapp  |  * Serving Flask app 'webapp'
+webapp  |  * Debug mode: on
+webapp  |  * Running on all addresses (0.0.0.0)
+webapp  |  * Running on http://127.0.0.1:8000
+webapp  |  * Running on http://192.168.15.14:8000
+webapp  | Press CTRL+C to quit
+webapp  |  * Restarting with stat
+webapp  |  * Debugger is active!
+webapp  |  * Debugger PIN: 125-165-193
 ```
 
 Test it again using curl or your browser.
-Return one folder:
 
+Stop your application:
+```sh
+ctrl + c
+```
+
+Remove the running docker:
+```sh
+docker:~$ docker rm -f webapp
+```
+
+Return one folder:
 ```sh
 device:~$ cd ..
 ```

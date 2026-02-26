@@ -214,6 +214,12 @@
             cells.forEach(c=>{
                 c.addEventListener('click', async ()=>{
                     const color = c.getAttribute('data-color');
+                    if (currentSelectedColor === color) {
+                        clearSelection();
+                        statusTextEl.textContent = 'Off';
+                        await sendColor('off');
+                        return;
+                    }
                     highlightColor(color);
                     statusTextEl.textContent = `Color: ${color}`;
                     await sendColor(color);
