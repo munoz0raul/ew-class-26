@@ -148,19 +148,19 @@ Images are built using a **Dockerfile**.
 
 This repository contains the step-by-step labs used during the hands-on workshop.
 
-Suggested flow:
+Suggested flow (links to each lab README):
 
-- `0-setup`
-- `1-hello-c`
-- `2-multi`
-- `3-blinkled`
-- `4-webapp`
-- `5-webapp-led`
-- `6-webapp-led-mcu`
-- `7-edgeimpulse`
-- `8-led-voice`
-- `9-webapp-led-mcu-voice`
-- `10-foundriesfactory`
+- [0-setup](0-setup/README.md)
+- [1-hello-c](1-hello-c/README.md)
+- [2-multi](2-multi/README.md)
+- [3-blinkled](3-blinkled/README.md)
+- [4-webapp](4-webapp/README.md)
+- [5-webapp-led](5-webapp-led/README.md)
+- [6-webapp-led-mcu](6-webapp-led-mcu/README.md)
+- [7-edgeimpulse](7-edgeimpulse/README.md)
+- [8-led-voice](8-led-voice/README.md)
+- [9-webapp-led-mcu-voice](9-webapp-led-mcu-voice/README.md)
+- [10-foundriesfactory](10-foundriesfactory/README.md)
 
 Each folder contains a dedicated `README.md` with hands-on instructions.
 
