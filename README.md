@@ -137,17 +137,10 @@ Images are built using a **Dockerfile**.
 
 ## Key Concepts
 
-### Layers
-Each Dockerfile instruction creates a layer. Layers are cached to speed up builds.
-
-### Base Image
-The starting point for building a container image (e.g., debian, alpine).
-
-### Multi-Stage Builds
-Allow separation between build environment and runtime environment, producing smaller and more secure final images.
-
-### Container Isolation
-Containers isolate applications from the base OS while sharing the same kernel.
+- **Layers**: Each Dockerfile instruction creates a layer. Layers are cached to speed up builds.
+- **Base Image**: The starting point for building a container image (e.g., debian, alpine).
+- **Multi-Stage Builds**: Allow separation between build environment and runtime environment, producing smaller and more secure final images.
+- **Container Isolation**: Containers isolate applications from the base OS while sharing the same kernel.
 
 ---
 
