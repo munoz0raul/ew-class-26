@@ -2,20 +2,16 @@
 
 ## Goal
 
-Learn how to create and train an AI model using Edge Impulse and prepare it for deployment on an Embedded Linux device.
+Learn how to create and train an AI model using Edge Impulse and prepare it
+for deployment on an Embedded Linux device.
 
 ---
 
 ## Why this matters
 
-Moving from proof-of-concept to production AI requires:
-
-- structured data pipelines
-- reproducible training workflows
-- deployment-ready artifacts
-
-Edge Impulse simplifies embedded ML workflows and bridges data collection,
-training, optimization, and deployment.
+Modern embedded devices increasingly include AI workloads. Understanding how
+to go from raw data → trained model → deployable artifact is critical to
+moving from prototype to production.
 
 ---
 
@@ -23,115 +19,116 @@ training, optimization, and deployment.
 
 In this lab you will:
 
-- create an Edge Impulse project
-- upload and label data
-- train a model
-- export a deployment-ready model for Embedded Linux.
+- Create an Edge Impulse project
+- Explore an existing dataset
+- Generate features
+- Train a model
+- Validate performance
+- Export a deployment-ready model (.eim)
 
 ---
 
 ## Steps
 
-# Edge Impulse Workflow
+### 1) Clone the reference project
 
-In this lab we introduce AI into the embedded workflow.
+Open the public Edge Impulse project:
 
-You will use Edge Impulse to train a model that will later run locally on the device.
+Embedded World 2026 – Foundries Keyword Dataset
 
-> [!NOTE]
-> Follow the screenshots in the assets folder for visual guidance.
+Clone the project into your account.
 
----
+![Clone Project](assets/edgeimpulse-1.png)
 
-## 1. Create a Project
-
-Open Edge Impulse Studio:
-
-https://studio.edgeimpulse.com
-
-Create a new project and select:
-
-- Target: Embedded Linux
-- Data type: Audio (voice recognition example)
-
-![Create Project](assets/edgeimpulse-1.png)
+This provides a prepared dataset so we can focus on the workflow instead of data collection.
 
 ---
 
-## 2. Upload or Collect Data
+### 2) Explore the dataset
 
-Upload sample data or record new samples using the Edge Impulse interface.
+Navigate to the Dataset view.
 
-Typical workflow:
+Inspect the audio samples and labels.
 
-- create classes (example: ON / OFF)
-- upload audio samples
-- label each recording appropriately
+![Dataset View](assets/edgeimpulse-2.png)
 
-![Upload Data](assets/edgeimpulse-2.png)
-![Label Data](assets/edgeimpulse-3.png)
+Understanding data quality is essential before training.
 
 ---
 
-## 3. Create the Impulse
+### 3) Create the Impulse
 
-Navigate to:
+Go to:
 
 Impulse Design → Create Impulse
 
 Configure:
 
-- Input block (Audio)
-- Processing block
-- Learning block (Classification)
+- Time series data (audio)
+- Processing block: MFE
+- Learning block: Transfer Learning (Keyword spotting)
 
-![Create Impulse](assets/edgeimpulse-4.png)
+![Create Impulse](assets/edgeimpulse-3.png)
+
+Save the impulse configuration.
 
 ---
 
-## 4. Generate Features
+### 4) Generate Features
 
-Run feature generation:
+Open the MFE processing block.
 
-- click Generate Features
-- review feature explorer visualization
+Click:
 
-![Feature Generation](assets/edgeimpulse-5.png)
+Generate Features
+
+![Generate Features](assets/edgeimpulse-4.png)
+
+Review:
+
+- DSP parameters
+- Feature visualization
+- Mel spectrogram output
+
+![Feature Parameters](assets/edgeimpulse-5.png)
+
+Feature explorer visualization helps identify separability between classes.
+
 ![Feature Explorer](assets/edgeimpulse-6.png)
 
 ---
 
-## 5. Train the Model
+### 5) Train the Model
 
-Open the training section:
+Open the Learning block.
 
-- select model parameters
-- start training
+Configure training settings and start training.
 
-Observe:
+![Training Settings](assets/edgeimpulse-7.png)
 
-- accuracy
-- confusion matrix
-- validation metrics
+Review:
 
-![Training](assets/edgeimpulse-7.png)
-![Results](assets/edgeimpulse-8.png)
+- Accuracy
+- Loss
+- Confusion matrix
 
----
-
-## 6. Test the Model
-
-Use Live Classification or testing dataset to validate performance.
-
-Adjust training parameters if necessary.
-
-![Testing](assets/edgeimpulse-9.png)
+![Training Results](assets/edgeimpulse-8.png)
 
 ---
 
-## 7. Deployment
+### 6) Validate the Model
 
-Go to Deployment tab.
+Use model testing or live classification tools.
+
+Ensure model behavior is acceptable before deployment.
+
+![Model Validation](assets/edgeimpulse-9.png)
+
+---
+
+### 7) Deployment
+
+Navigate to the Deployment tab.
 
 Select:
 
@@ -145,14 +142,15 @@ Download the deployment package (.eim file).
 
 ## Expected result
 
-You should obtain:
+You should now have:
 
-- a trained model
-- acceptable accuracy for classification
-- a downloadable deployment package (.eim).
+- A trained keyword spotting model
+- Validated classification performance
+- A downloadable .eim deployment artifact
 
 ---
 
 ## Transition to next lab
 
-Next we will run the trained model locally and use voice recognition to control hardware.
+Next we will integrate the trained model into a containerized application
+and use voice recognition to control hardware on the device.
