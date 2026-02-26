@@ -41,6 +41,8 @@ You will use Edge Impulse to train a model that will later run locally on the de
 > [!NOTE]
 > Follow the screenshots in the assets folder for visual guidance.
 
+---
+
 ## 1. Create a Project
 
 Open Edge Impulse Studio:
@@ -51,6 +53,8 @@ Create a new project and select:
 
 - Target: Embedded Linux
 - Data type: Audio (voice recognition example)
+
+![Create Project](assets/edgeimpulse-1.png)
 
 ---
 
@@ -63,6 +67,9 @@ Typical workflow:
 - create classes (example: ON / OFF)
 - upload audio samples
 - label each recording appropriately
+
+![Upload Data](assets/edgeimpulse-2.png)
+![Label Data](assets/edgeimpulse-3.png)
 
 ---
 
@@ -78,6 +85,8 @@ Configure:
 - Processing block
 - Learning block (Classification)
 
+![Create Impulse](assets/edgeimpulse-4.png)
+
 ---
 
 ## 4. Generate Features
@@ -86,6 +95,9 @@ Run feature generation:
 
 - click Generate Features
 - review feature explorer visualization
+
+![Feature Generation](assets/edgeimpulse-5.png)
+![Feature Explorer](assets/edgeimpulse-6.png)
 
 ---
 
@@ -102,6 +114,9 @@ Observe:
 - confusion matrix
 - validation metrics
 
+![Training](assets/edgeimpulse-7.png)
+![Results](assets/edgeimpulse-8.png)
+
 ---
 
 ## 6. Test the Model
@@ -109,6 +124,8 @@ Observe:
 Use Live Classification or testing dataset to validate performance.
 
 Adjust training parameters if necessary.
+
+![Testing](assets/edgeimpulse-9.png)
 
 ---
 
@@ -122,7 +139,7 @@ Embedded Linux (AARCH64)
 
 Download the deployment package (.eim file).
 
-This file will be used in the next labs.
+![Deployment](assets/edgeimpulse-10.png)
 
 ---
 
