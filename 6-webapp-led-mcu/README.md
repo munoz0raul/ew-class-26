@@ -1,131 +1,147 @@
-# BlinkLED + WebApp (MCU + Sysfs)
+# Lab 6 — Web App + LED + MCU Integration (6-webapp-led-mcu)
 
+## Goal
 
-In this example, a Flask web app controls **both** the system LEDs (sysfs) and the MCU LEDs via the Arduino Bridge. The Docker image uses a multi-stage build to compile and flash the MCU firmware before starting the UI. Each color tile acts as a switch: click once to turn on, click again to turn off.
+Extend the web-controlled LED application to communicate with an external MCU,
+demonstrating how Embedded Linux acts as a bridge between user interfaces and
+low-level hardware control.
 
+---
 
-Getting Started
+## Why this matters
 
-Create and Enter a Directory
+Real embedded products rarely control hardware directly from a single layer.
 
-> [!NOTE] 
+Instead:
+
+- Linux acts as orchestration layer
+- Containers run application logic
+- MCUs handle realtime hardware tasks
+
+Understanding this architecture is critical for scalable embedded system design.
+
+---
+
+## What you will build
+
+A containerized web application capable of:
+
+- serving a web interface
+- controlling LEDs
+- communicating with an MCU from inside the container.
+
+---
+
+## Steps
+
+# WebApp + LED + MCU
+
+In this lab we expand the previous example by integrating MCU communication.
+
+> [!NOTE]
 > Run the following commands on the device
 
+Create and enter a directory:
+
 ```sh
-device:~$ mkdir 6-webapp-led-mcu
-device:~$ cd 6-webapp-led-mcu
+device:~$ mkdir webapp-led-mcu
+device:~$ cd webapp-led-mcu
 ```
 
-Build the Flask App
-
-Start with the `webapp-led-mcu.py` file:
+Create the application file:
 
 ```sh
 vim webapp-led-mcu.py
 ```
+
 [webapp-led-mcu.py](webapp-led-mcu.py)
 
-Create the HTML File
+Create the HTML interface:
 
 ```sh
 vim index.html
 ```
+
 [index.html](index.html)
 
-Assets Folder
-
-All MCU and UI assets are grouped in `assets/`:
-
-- [assets/arduino.png](assets/arduino.png)
-- [assets/edgeimpulse.png](assets/edgeimpulse.png)
-- [assets/foundries.png](assets/foundries.png)
-- [assets/qualcomm.png](assets/qualcomm.png)
-- [assets/sketch.yaml](assets/sketch.yaml)
-- [assets/sketch.ino](assets/sketch.ino)
-- [assets/frames.h](assets/frames.h)
-- [assets/arduino.asc](assets/arduino.asc)
-- [assets/arduino.list](assets/arduino.list)
-- [assets/openocd/](assets/openocd/)
-
-Start Script
+Create start script:
 
 ```sh
 vim start.sh
 ```
+
 [start.sh](start.sh)
 
-Create the Dockerfile
+Create Dockerfile:
 
 ```sh
 vim Dockerfile
 ```
+
 [Dockerfile](Dockerfile)
 
-Build and Run the Container
+Create docker-compose file:
 
-With all the files in the same folder, build the container and add the tag `webapp-led-mcu:latest` to it.
+```sh
+vim docker-compose.yml
+```
+
+[docker-compose.yml](docker-compose.yml)
+
+Build the container:
 
 ```sh
 device:~$ docker build --tag webapp-led-mcu:latest .
 ```
 
-Launch the Container
-
-We must run with `--privileged` so the container can access GPIO and sysfs, and mount the Arduino router socket.
+List Docker images:
 
 ```sh
-device:~$ docker run -it --network host -d --rm --name webapp-led-mcu \
-    --privileged \
-	-v /var/run/arduino-router.sock:/var/run/arduino-router.sock \
-	-v /etc/localtime:/etc/localtime:ro \
-	webapp-led-mcu:latest
+device:~$ docker image ls
 ```
 
-Open the page in your browser using the device IP.
-
-Debugging
-
-Check the Running Container
-
-```sh
-device:~$ docker ps
-```
-
-Check the Logs
-
-```sh
-device:~$ docker logs -f webapp-led-mcu
-```
-
-If Bridge calls fail, confirm `/var/run/arduino-router.sock` is mounted and the container is running with `--privileged`.
-
-Docker Compose
-
-To simplify container management, create the `docker-compose.yml` file:
-
-```sh
-vim docker-compose.yml
-```
-[docker-compose.yml](docker-compose.yml)
-
-Stop the Running Container
-
-```sh
-device:~$ docker rm -f webapp-led-mcu
-```
-
-Run the Application with Docker Compose
+Run using Docker Compose:
 
 ```sh
 device:~$ docker compose up -d
 ```
 
-Remove the running docker:
+Check running containers:
+
 ```sh
-docker:~$ docker rm -f webapp-led-mcu
+device:~$ docker ps
 ```
-Return One Folder Up
+
+Check logs:
+
+```sh
+device:~$ docker logs webapp-led-mcu
+```
+
+Access the web interface from your browser:
+
+http://DEVICE_IP:PORT
+
+Stop container:
+
+```sh
+device:~$ docker compose down
+```
+
+Return one folder:
 
 ```sh
 device:~$ cd ..
 ```
+
+---
+
+## Expected result
+
+The web interface should successfully control LEDs while communicating with the MCU backend.
+
+---
+
+## Transition to next lab
+
+Next we introduce Edge Impulse and begin working with AI models on embedded devices.

@@ -1,99 +1,168 @@
-# LED Voice Classifier WebUI (MCU + Sysfs)
+# Lab 9 — Web App + LED + MCU + Voice AI (9-webapp-led-mcu-voice)
 
-In this example, the UI responds **only to voice commands** using **Edge Impulse**. The flow is to say **“Select”** and then say a **color** to light the **Arduino Uno Q LEDs** via the *device bridge*. The UI is available on port `8000`.
+## Goal
 
-Getting Started
+Combine all previous concepts into a single embedded system:
 
-Create and Enter a Directory
+- containerized web application
+- MCU communication
+- LED control
+- local AI voice inference
 
-> [!NOTE] 
-> Run the following commands on the device
+This lab represents a realistic embedded Linux product architecture.
+
+---
+
+## Why this matters
+
+Modern embedded products integrate multiple layers:
+
+- UI (web interface)
+- application logic (containerized services)
+- AI inference running locally
+- hardware control via Linux and MCU interaction
+
+Understanding how these pieces connect is key to moving from prototype to production.
+
+---
+
+## What you will build
+
+A full-stack embedded application where:
+
+- a web interface runs inside a container
+- voice commands are processed locally using an Edge Impulse model
+- LEDs and MCU behavior are controlled based on AI decisions.
+
+---
+
+## Steps
+
+# WebApp + LED + MCU + Voice
+
+In this lab we combine all previous work into a single system.
+
+> [!NOTE]
+> Ensure your `deployment.eim` model file is present in this folder.
+
+Create and enter directory:
 
 ```sh
-device:~$ mkdir 9-webapp-led-mcu-voice
-device:~$ cd 9-webapp-led-mcu-voice
+device:~$ mkdir webapp-led-mcu-voice
+device:~$ cd webapp-led-mcu-voice
 ```
 
-Main Application
+Copy model file:
+
+```sh
+device:~$ cp /path/to/deployment.eim .
+```
+
+Create main application:
 
 ```sh
 vim webapp-led-mcu-voice.py
 ```
+
 [webapp-led-mcu-voice.py](webapp-led-mcu-voice.py)
 
-UI (HTML)
+Create web interface:
 
 ```sh
 vim index.html
 ```
+
 [index.html](index.html)
 
-Voice Model
+Create start script:
 
-The default model is `deployment.eim`:
+```sh
+vim start.sh
+```
 
-- [deployment.eim](deployment.eim)
+[start.sh](start.sh)
 
-Logo Assets
-
-- [assets/arduino.png](assets/arduino.png)
-- [assets/edgeimpulse.png](assets/edgeimpulse.png)
-- [assets/foundries.png](assets/foundries.png)
-- [assets/qualcomm.png](assets/qualcomm.png)
-
-Dockerfile and Compose
+Create Dockerfile:
 
 ```sh
 vim Dockerfile
 ```
+
 [Dockerfile](Dockerfile)
+
+Create docker-compose file:
 
 ```sh
 vim docker-compose.yml
 ```
+
 [docker-compose.yml](docker-compose.yml)
 
-Run with Docker Compose
+Build container:
 
 ```sh
-device:~$ docker compose up
+device:~$ docker build --tag webapp-led-mcu-voice:latest .
 ```
 
-At startup, the service prints:
+List Docker images:
 
-- `http://0.0.0.0:8000`
-- `http://127.0.0.1:8000`
-- **Local IPs** (example: `http://192.168.x.x:8000`)
+```sh
+device:~$ docker image ls
+```
 
-Voice Flow (Summary)
+Run using Docker Compose:
 
-1. The Edge Impulse runner starts with `deployment.eim`.
-2. Say **“Select”** to open the color window.
-3. Say **blue, green, red, yellow,** or **purple**.
-4. The UI updates and the MCU LEDs turn on via *Bridge*.
+```sh
+device:~$ docker compose up -d
+```
 
-Debugging
-
-Check the Running Container
+Check running containers:
 
 ```sh
 device:~$ docker ps
 ```
 
-Check the Logs
+Check logs:
 
 ```sh
-device:~$ docker logs class-voice-led-webui
+device:~$ docker logs webapp-led-mcu-voice
 ```
 
-If audio does not work, confirm `/dev/snd` is available and the container is running with `privileged: true` and `group_add: ["audio"]`.
+Open web interface in browser:
 
-Notes
+http://DEVICE_IP:PORT
 
-- The container uses `network_mode: host` and exposes port `8000`.
-- The Arduino Bridge socket must be mounted:
-  - `/var/run/arduino-router.sock:/var/run/arduino-router.sock`
+Speak trained commands into microphone and observe:
 
-References
+- voice inference running locally
+- web UI updates
+- LED / MCU actions triggered
 
-- Base image: `../0game-base/README.md`
+Stop container:
+
+```sh
+device:~$ docker compose down
+```
+
+Return one folder:
+
+```sh
+device:~$ cd ..
+```
+
+---
+
+## Expected result
+
+The system should:
+
+- serve a web interface
+- run local AI voice inference
+- trigger hardware actions
+- demonstrate complete embedded device workflow.
+
+---
+
+## Transition to next lab
+
+Next step: connect devices to FoundriesFactory to manage deployment, updates, and lifecycle at scale.

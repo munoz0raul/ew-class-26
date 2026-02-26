@@ -1,241 +1,141 @@
-# Lab 7 — Building an Edge AI Model with Edge Impulse
-
-In the previous labs we focused on:
-
-- building Embedded Linux applications
-- packaging applications with containers
-- interacting with hardware devices
-- designing real-world system workflows
-
-Now we introduce the missing piece:
-
-👉 **Edge AI**
-
-In this lab you will learn how to:
-
-- create an Edge Impulse project
-- explore an existing dataset
-- understand the impulse pipeline
-- train a simple keyword recognition model
-- export a model that will later be integrated into our containerized application.
-
-This lab focuses on **understanding the workflow**, not on deep ML theory.
-
----
+# Lab 7 — Edge Impulse Model Creation (7-edgeimpulse)
 
 ## Goal
 
-By the end of this lab you will:
-
-- understand how Edge Impulse structures an ML pipeline
-- know how models are trained for embedded deployment
-- export a Linux-ready inference package.
+Learn how to create and train an AI model using Edge Impulse and prepare it for deployment on an Embedded Linux device.
 
 ---
 
-## Step 1 — Clone the base project
+## Why this matters
 
-Open the public project:
+Moving from proof-of-concept to production AI requires:
 
-👉 https://studio.edgeimpulse.com/public/913211/latest
+- structured data pipelines
+- reproducible training workflows
+- deployment-ready artifacts
 
-Click:
+Edge Impulse simplifies embedded ML workflows and bridges data collection,
+training, optimization, and deployment.
 
-**Clone this project**
+---
+
+## What you will build
+
+In this lab you will:
+
+- create an Edge Impulse project
+- upload and label data
+- train a model
+- export a deployment-ready model for Embedded Linux.
+
+---
+
+## Steps
+
+# Edge Impulse Workflow
+
+In this lab we introduce AI into the embedded workflow.
+
+You will use Edge Impulse to train a model that will later run locally on the device.
+
+> [!NOTE]
+> Follow the screenshots in the assets folder for visual guidance.
+
+## 1. Create a Project
+
+Open Edge Impulse Studio:
+
+https://studio.edgeimpulse.com
+
+Create a new project and select:
+
+- Target: Embedded Linux
+- Data type: Audio (voice recognition example)
+
+---
+
+## 2. Upload or Collect Data
+
+Upload sample data or record new samples using the Edge Impulse interface.
+
+Typical workflow:
+
+- create classes (example: ON / OFF)
+- upload audio samples
+- label each recording appropriately
+
+---
+
+## 3. Create the Impulse
+
+Navigate to:
+
+Impulse Design → Create Impulse
+
+Configure:
+
+- Input block (Audio)
+- Processing block
+- Learning block (Classification)
+
+---
+
+## 4. Generate Features
+
+Run feature generation:
+
+- click Generate Features
+- review feature explorer visualization
+
+---
+
+## 5. Train the Model
+
+Open the training section:
+
+- select model parameters
+- start training
+
+Observe:
+
+- accuracy
+- confusion matrix
+- validation metrics
+
+---
+
+## 6. Test the Model
+
+Use Live Classification or testing dataset to validate performance.
+
+Adjust training parameters if necessary.
+
+---
+
+## 7. Deployment
+
+Go to Deployment tab.
 
 Select:
 
-- Personal project
-- Any project name
+Embedded Linux (AARCH64)
 
-Example:
+Download the deployment package (.eim file).
 
-Embedded World 2026 - YourName
-
----
-
-![Clone project](assets/edgeimpulse-10.png)
+This file will be used in the next labs.
 
 ---
 
-## Step 2 — Explore the dataset
+## Expected result
 
-Navigate to:
-Data acquisition
+You should obtain:
 
-
-You will see:
-
-- pre-recorded audio samples
-- multiple labels (keywords)
-
-This dataset is already prepared so we can focus on the pipeline instead of data collection.
+- a trained model
+- acceptable accuracy for classification
+- a downloadable deployment package (.eim).
 
 ---
 
-![Dataset view](assets/edgeimpulse-1.png)
+## Transition to next lab
 
----
-
-## Step 3 — Understanding the Impulse
-
-Navigate to:
-Impulse design
-
-An impulse consists of:
-
-1. Input data (audio)
-2. DSP feature extraction (MFE)
-3. Machine learning model
-4. Output classification
-
-This pipeline converts raw audio into features that a neural network can understand.
-
----
-
-![Impulse design](assets/edgeimpulse-7.png)
-
----
-
-## Step 4 — Generate Features
-
-Open the MFE block and click:
-Generate features
-
-
-This step:
-
-- transforms raw audio into spectral features
-- prepares training data for the neural network.
-
----
-
-![Feature generation](assets/edgeimpulse-2.png)
-
----
-
-After completion, inspect:
-
-- Feature explorer visualization
-- Class separation
-
----
-
-![Feature explorer](assets/edgeimpulse-3.png)
-
----
-
-## Step 5 — Train the Model
-
-Open:
-Transfer learning (Keyword spotting)
-
-
-Click:
-Start training
-
-The model will:
-
-- train using transfer learning
-- optimize for embedded inference.
-
----
-
-![Training result](assets/edgeimpulse-4.png)
-
----
-
-After training, inspect:
-
-- Accuracy
-- Confusion matrix
-- Model performance metrics
-
----
-
-## Step 6 — Configure Target Device
-
-Set the target device to:
-Arduino UNO Q (Qualcomm QRB2210)
-
-This step helps Edge Impulse estimate:
-
-- memory usage
-- latency
-- inference performance.
-
----
-
-![Target configuration](assets/edgeimpulse-8.png)
-
----
-
-## Step 7 — Build Deployment Package
-
-Navigate to:
-Deployment
-
-Select:
-
-Linux (AARCH64)
-
-Then click:
-Build
-
-
-This generates:
-
-- a Linux-compatible inference package.
-
----
-
-![Deployment](assets/edgeimpulse-9.png)
-
----
-
-Download the generated archive.
-
-We will use this package in the next lab.
-
----
-
-## What just happened?
-
-You built a full Edge AI pipeline:
-
-
-```sh
-Raw audio
-↓
-Feature extraction
-↓
-Neural network training
-↓
-Embedded-optimized model
-↓
-Linux deployment artifact
-```
-
-In the next lab we will:
-
-👉 integrate this model into a containerized Embedded Linux application.
-
----
-
-## Troubleshooting
-
-If training fails:
-
-- verify project cloned correctly
-- ensure features were generated first
-- refresh browser if training UI becomes stuck.
-
----
-
-## Key Takeaway
-
-Edge Impulse allows developers to focus on system integration instead of low-level ML engineering.
-
-In this workshop we use it as:
-
-👉 a fast path from prototype to deployable edge AI workloads.
+Next we will run the trained model locally and use voice recognition to control hardware.

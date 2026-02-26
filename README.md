@@ -1,51 +1,156 @@
+# Embedded World Class 2026
+## From Vision to Deployment: Developing Secure AI-Enabled Linux Devices
 
-# Mastering Docker for Embedded Linux Development
+This hands-on workshop demonstrates how to build real-world embedded Linux products that combine:
 
-This training shows how to build, run, and debug containerized apps on **embedded Linux** using **Docker**. We focus on practical workflows that move from “Hello World” to real hardware access, culminating in web UIs that control LEDs on the **Arduino Uno Q** running **Debian**.
+- Embedded Linux
+- Containerized applications
+- Hardware integration
+- Edge AI
+- Secure deployment workflows
+- Device lifecycle management
 
-The material is split into small, progressive examples. Each folder is a self‑contained lab with its own README and files. Together, they build a full mental model of Docker in embedded systems: images, containers, multi‑stage builds, device access, and orchestration.
+Instead of focusing on isolated technologies, this workshop follows the full journey of an embedded product — from prototype to production-ready architecture.
 
-## Training goals
+---
 
-By the end, you will be able to:
+## Workshop Philosophy
 
-- Build and run Docker images on embedded Linux.
-- Create multi‑stage Dockerfiles to reduce image size.
-- Use Docker Compose for repeatable workflows.
-- Access hardware (GPIO, LEDs, audio) from containers safely.
-- Deploy a web UI that controls MCU LEDs via the Arduino Bridge.
+Modern embedded devices are no longer single applications running on custom firmware.
 
-## Target hardware
+They are:
 
-- **Board:** Arduino Uno Q
-- **OS:** Debian (embedded Linux)
-- **Use cases:** sysfs LEDs, MCU LED control via Bridge, web UI control, and voice‑driven LED selection.
+- Linux-based systems
+- running containerized applications
+- integrating AI workloads
+- remotely updated and managed over time.
 
-## Repository structure
+This workshop shows how to structure development around:
 
-Start from the top and follow the sequence:
+👉 lifecycle-first engineering.
 
-- [1-hello-c](1-hello-c/) — Minimal C app and Docker basics.
-- [2-multi](2-multi/) — Multi‑stage container intro.
-- [3-blinkled](3-blinkled/) — Sysfs LED control and debugging permissions.
-- [4-webapp](4-webapp/) — Flask web app and port mapping.
-- [5-webapp-led](5-webapp-led/) — Web UI controlling sysfs LEDs.
-- [6-webapp-led-mcu](6-webapp-led-mcu/) — Multi‑stage build + MCU flashing + Bridge LED control.
-- [7-webapp-led-mcu-voice](7-webapp-led-mcu-voice/) — Voice‑driven UI with Edge Impulse.
-- [0game-base](0game-base/) — Shared runtime used by voice/MCU examples.
+---
 
-## How to use this training
+## Hardware Platform
 
-Each folder contains a README with the exact steps and file links. Follow them in order, because each example builds on the previous one.
+Participants will use:
 
-If you are running on the target board:
+- Arduino Uno Q (Debian-based Embedded Linux)
+- USB peripherals (microphone, networking)
+- Containerized applications running locally.
 
-- Use SSH to access the board.
-- Build and run the containers on the board itself.
-- For hardware access, run containers with the required privileges/devices listed in each lab.
+The device ships with Debian to accelerate prototyping.
 
-## Course conclusion
+During the workshop we discuss:
 
-This training demonstrates how Docker can be safely and effectively used on embedded Linux without losing access to hardware. By the final example, you will have a full end‑to‑end flow: **multi‑stage builds**, **MCU firmware flashing**, **Bridge control**, and **web/voice interfaces**—all running in containers on **Debian** for the **Arduino Uno Q**.
+- why Debian is excellent for early development
+- why production systems often migrate to custom distributions (e.g. Yocto).
 
-If you complete all labs in order, you will be ready to design and ship real embedded Docker applications with clean, maintainable workflows.
+---
+
+## Learning Path
+
+Each lab builds incrementally toward a complete embedded system.
+
+### Phase 1 — Container Fundamentals
+
+1-hello-c  
+Build and run your first containerized application.
+
+2-multi  
+Learn multi-stage builds and optimized container images.
+
+---
+
+### Phase 2 — Hardware Interaction
+
+3-blinkled  
+Access hardware from containers and understand permissions and debugging.
+
+---
+
+### Phase 3 — Application Architecture
+
+4-webapp  
+Introduce networked services and web applications.
+
+5-webapp-led  
+Connect UI interactions with hardware control.
+
+6-webapp-led-mcu  
+Integrate Linux applications with MCU-based systems.
+
+---
+
+### Phase 4 — Edge AI Integration
+
+7-edgeimpulse  
+Train and export an AI model using Edge Impulse.
+
+8-led-voice  
+Run local AI inference controlling hardware.
+
+---
+
+### Phase 5 — Full System Integration
+
+9-webapp-led-mcu-voice  
+Combine UI, AI, and hardware into a complete embedded architecture.
+
+---
+
+### Phase 6 — Production Lifecycle
+
+10-foundriesfactory  
+Connect devices to CI/CD workflows and OTA deployment infrastructure.
+
+---
+
+## Key Concepts Covered
+
+- Container-based embedded development
+- Application isolation and reproducibility
+- Hardware access from containers
+- Embedded web services
+- AI deployment on Linux devices
+- Device lifecycle and secure updates
+- CI/CD for embedded systems.
+
+---
+
+## Target Audience
+
+- Embedded Linux developers
+- IoT engineers
+- AI engineers moving into embedded systems
+- Technical leads designing connected products.
+
+---
+
+## Requirements
+
+Participants should bring:
+
+- Laptop with SSH client
+- Modern web browser
+- Basic familiarity with Linux command line.
+
+---
+
+## Workshop Outcome
+
+By the end of this training you will have:
+
+- Built a working AI-enabled embedded device
+- Understood the transition from prototype to production architecture
+- Learned a repeatable workflow for embedded Linux development.
+
+---
+
+## Instructor Notes
+
+This repository is structured to be followed sequentially.
+
+Each lab builds on previous concepts.
+
+Avoid skipping ahead unless instructed.
