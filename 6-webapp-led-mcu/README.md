@@ -14,7 +14,7 @@ Real embedded products rarely control hardware directly from a single layer.
 
 Instead:
 
-- Linux®acts as orchestration layer
+- Linux® acts as orchestration layer
 - Containers run application logic
 - MCUs handle realtime hardware tasks
 

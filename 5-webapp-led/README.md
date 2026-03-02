@@ -9,7 +9,7 @@ Combine a web interface with hardware control, allowing LED interaction through 
 ## Why this matters
 
 Modern embedded systems often expose user interfaces through web dashboards.  
-Bridging web services with hardware control demonstrates how Linux®acts as an orchestration layer between UI and physical devices.
+Bridging web services with hardware control demonstrates how Linux® acts as an orchestration layer between UI and physical devices.
 
 ---
 

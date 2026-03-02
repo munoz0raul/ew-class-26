@@ -1,5 +1,5 @@
 # Embedded World 2026 – Class 7.3
-## From Vision to Deployment: Developing Secure AI-Enabled Linux®Devices
+## From Vision to Deployment: Developing Secure AI-Enabled Linux® Devices
 
 **Instructor**  
 Raul Rosetto Muñoz  
@@ -42,7 +42,7 @@ By the end of this workshop, participants will be able to:
 
 ## Prior Knowledge
 
-- Basic understanding of Linux®and embedded systems
+- Basic understanding of Linux® and embedded systems
 - Familiarity with terminal/command-line tools
 - Some exposure to containers (Docker) and/or CI/CD concepts is helpful, but not mandatory
 
@@ -74,7 +74,7 @@ Recommended tools by operating system:
 
 ## Training Motivation
 
-Last year at Embedded World, I delivered a hands-on training focused on Docker containers for embedded Linux®. The goal was to demonstrate the importance of combining a well-maintained Linux®distribution with containerized applications.
+Last year at Embedded World, I delivered a hands-on training focused on Docker containers for embedded Linux®. The goal was to demonstrate the importance of combining a well-maintained Linux® distribution with containerized applications.
 
 Containers solve many problems:
 - Application portability across hardware platforms
@@ -108,7 +108,7 @@ Docker is an open-source platform that automates the deployment, scaling, and ma
 
 In embedded systems, Docker allows:
 - Application portability across different hardware platforms
-- Isolation from the base Linux®distribution
+- Isolation from the base Linux® distribution
 - Simplified updates and lifecycle management
 
 ---
@@ -179,7 +179,3 @@ Each folder contains a dedicated `README.md` with hands-on instructions.
 FoundriesFactory is a trademark or registered trademark of Foundries.io Limited.
 
 The Linux Foundation and The Linux Foundation logo design are registered trademarks of The Linux Foundation. Linux is a registered trademark of Linus Torvalds.
-
-```
-
-

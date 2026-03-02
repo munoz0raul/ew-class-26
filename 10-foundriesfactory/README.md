@@ -55,7 +55,7 @@ It provides:
 - Fleet monitoring and management
 - Scalable product development infrastructure
 
-Instead of treating Linux, containers, updates, and security as separate problems, FoundriesFactory™ integrates them into a unified workflow.
+Instead of treating Linux®, containers, updates, and security as separate problems, FoundriesFactory™ integrates them into a unified workflow.
 
 ---
 
@@ -74,7 +74,7 @@ Without automation and infrastructure, maintaining a fleet becomes risky and exp
 
 FoundriesFactory™ solves this by combining:
 
-- Yocto-based secure Linux®foundations
+- Yocto-based secure Linux® foundations
 - Containerized application workflows
 - Cloud-based CI/CD
 - Secure update frameworks (TUF)

@@ -20,7 +20,7 @@ Modern embedded products integrate multiple layers:
 - UI (web interface)
 - application logic (containerized services)
 - AI inference running locally
-- hardware control via Linux®and MCU interaction
+- hardware control via Linux® and MCU interaction
 
 Understanding how these pieces connect is key to moving from prototype to production.
 
