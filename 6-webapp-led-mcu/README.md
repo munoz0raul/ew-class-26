@@ -3,7 +3,7 @@
 ## Goal
 
 Extend the web-controlled LED application to communicate with an external MCU,
-demonstrating how Embedded Linux acts as a bridge between user interfaces and
+demonstrating how Embedded Linux® acts as a bridge between user interfaces and
 low-level hardware control.
 
 ---
@@ -14,7 +14,7 @@ Real embedded products rarely control hardware directly from a single layer.
 
 Instead:
 
-- Linux acts as orchestration layer
+- Linux®acts as orchestration layer
 - Containers run application logic
 - MCUs handle realtime hardware tasks
 

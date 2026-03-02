@@ -12,7 +12,7 @@ This lab connects AI inference with real-world hardware control.
 
 It demonstrates:
 
-- running ML inference directly on an Embedded Linux device
+- running ML inference directly on an Embedded Linux® device
 - integrating AI models inside containerized applications
 - bridging voice recognition with physical device behavior
 

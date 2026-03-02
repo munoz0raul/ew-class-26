@@ -1,3 +1,8 @@
+#
+# Copyright (c) 2025 Foundries.io
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
 FROM debian:trixie-slim AS builder
 ENV DEBIAN_FRONTEND=noninteractive
 

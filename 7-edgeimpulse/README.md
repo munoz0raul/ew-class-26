@@ -3,7 +3,7 @@
 ## Goal
 
 Learn how to create and train an AI model using Edge Impulse and prepare it
-for deployment on an Embedded Linux device.
+for deployment on an Embedded Linux® device.
 
 ---
 
@@ -132,7 +132,7 @@ Navigate to the Deployment tab.
 
 Select:
 
-Embedded Linux (AARCH64)
+Embedded Linux® (AARCH64)
 
 Download the deployment package (.eim file).
 

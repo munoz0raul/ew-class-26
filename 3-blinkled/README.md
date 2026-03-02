@@ -8,7 +8,7 @@ Learn how to access hardware from inside a container and understand basic debugg
 
 ## Why this matters
 
-In embedded Linux systems, applications frequently need access to hardware interfaces. Containers add isolation, which means hardware access sometimes requires additional configuration such as privileged mode.
+In embedded Linux® systems, applications frequently need access to hardware interfaces. Containers add isolation, which means hardware access sometimes requires additional configuration such as privileged mode.
 
 ---
 

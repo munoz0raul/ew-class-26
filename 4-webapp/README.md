@@ -2,7 +2,7 @@
 
 ## Goal
 
-Learn how to run a simple web application inside a container and expose services through networking on an Embedded Linux device.
+Learn how to run a simple web application inside a container and expose services through networking on an Embedded Linux® device.
 
 ---
 

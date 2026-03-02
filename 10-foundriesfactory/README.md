@@ -1,8 +1,8 @@
-# 10 - FoundriesFactory: From Prototype to Production
+# 10 - FoundriesFactory™: From Prototype to Production
 
 Up to this point in the workshop, we have:
 
-- Built and run Docker containers on an embedded Linux device
+- Built and run Docker containers on an embedded Linux® device
 - Learned about container isolation and multi-stage builds
 - Interacted with hardware from inside containers
 - Trained and exported AI models using Edge Impulse
@@ -35,17 +35,17 @@ When moving from prototype to production, we must think about:
 
 Manually managing these aspects does not scale.
 
-This is where **FoundriesFactory** comes in.
+This is where **FoundriesFactory™** comes in.
 
 ---
 
-## What is FoundriesFactory?
+## What is FoundriesFactory™?
 
-FoundriesFactory is a cloud-based platform designed to manage the full lifecycle of embedded Linux devices.
+FoundriesFactory™ is a cloud-based platform designed to manage the full lifecycle of embedded Linux® devices.
 
 It provides:
 
-- Secure Embedded Linux (Yocto-based)
+- Secure Embedded Linux® (Yocto-based)
 - Automated CI/CD pipelines
 - CVE scanning and patch management
 - SBOM generation
@@ -55,7 +55,7 @@ It provides:
 - Fleet monitoring and management
 - Scalable product development infrastructure
 
-Instead of treating Linux, containers, updates, and security as separate problems, FoundriesFactory integrates them into a unified workflow.
+Instead of treating Linux, containers, updates, and security as separate problems, FoundriesFactory™ integrates them into a unified workflow.
 
 ---
 
@@ -72,9 +72,9 @@ In real-world IoT and edge AI deployments:
 
 Without automation and infrastructure, maintaining a fleet becomes risky and expensive.
 
-FoundriesFactory solves this by combining:
+FoundriesFactory™ solves this by combining:
 
-- Yocto-based secure Linux foundations
+- Yocto-based secure Linux®foundations
 - Containerized application workflows
 - Cloud-based CI/CD
 - Secure update frameworks (TUF)
@@ -84,7 +84,7 @@ FoundriesFactory solves this by combining:
 
 ## Intermediate Step: Fioup
 
-Before using the full FoundriesFactory OTA system, we will introduce **Fioup**.
+Before using the full FoundriesFactory™ OTA system, we will introduce **Fioup**.
 
 Fioup is a lightweight tool that enables container-based device management and updates.
 
@@ -127,7 +127,7 @@ You will:
 2. Register your device
 3. Associate it with your Factory instance
 
-After registration, your device should appear online in the FoundriesFactory dashboard.
+After registration, your device should appear online in the FoundriesFactory™ dashboard.
 
 ---
 
@@ -171,7 +171,7 @@ By combining:
 
 - AI model training (Edge Impulse)
 - Containerized applications
-- Secure Embedded Linux
+- Secure Embedded Linux®
 - CI/CD pipelines
 - OTA infrastructure
 - Device identity management
@@ -180,4 +180,4 @@ We now have a complete workflow:
 
 **From vision to production-ready embedded AI devices.**
 
-This is how modern embedded Linux products are built at scale.
+This is how modern embedded Linux® products are built at scale.

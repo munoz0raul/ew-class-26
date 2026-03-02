@@ -9,7 +9,7 @@ Combine all previous concepts into a single embedded system:
 - LED control
 - local AI voice inference
 
-This lab represents a realistic embedded Linux product architecture.
+This lab represents a realistic embedded Linux® product architecture.
 
 ---
 
@@ -20,7 +20,7 @@ Modern embedded products integrate multiple layers:
 - UI (web interface)
 - application logic (containerized services)
 - AI inference running locally
-- hardware control via Linux and MCU interaction
+- hardware control via Linux®and MCU interaction
 
 Understanding how these pieces connect is key to moving from prototype to production.
 
@@ -165,4 +165,4 @@ The system should:
 
 ## Transition to next lab
 
-Next step: connect devices to FoundriesFactory to manage deployment, updates, and lifecycle at scale.
+Next step: connect devices to FoundriesFactory™ to manage deployment, updates, and lifecycle at scale.

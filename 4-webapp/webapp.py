@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+#
+# Copyright (c) 2025 Foundries.io
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
 from flask import Flask
 
 app = Flask(__name__)

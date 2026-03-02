@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# Copyright (c) 2025 Foundries.io
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
 
 USER_LED_PATHS=(
   "/sys/class/leds/blue:user/brightness"

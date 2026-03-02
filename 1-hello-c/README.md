@@ -4,7 +4,7 @@
 
 In this lab you will:
 
-- build your first Docker image on an Embedded Linux device
+- build your first Docker image on an Embedded Linux® device
 - compile a C program inside the container (not on the host)
 - run the container and inspect it with basic Docker commands.
 
@@ -14,7 +14,7 @@ This lab sets the foundation for the rest of the workshop.
 
 ## Why this matters
 
-Embedded Linux distributions are often optimized and minimal.
+Embedded Linux® distributions are often optimized and minimal.
 They typically do NOT include compilers (like GCC) or full developer toolchains.
 
 If the device supports Docker, you can keep the base OS clean and still:

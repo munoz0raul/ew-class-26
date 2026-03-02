@@ -2,7 +2,7 @@
 
 ## Goal
 
-Learn how multi-stage builds reduce image size and separate build/runtime environments while keeping the build process reproducible for Embedded Linux.
+Learn how multi-stage builds reduce image size and separate build/runtime environments while keeping the build process reproducible for Embedded Linux®.
 
 ---
 

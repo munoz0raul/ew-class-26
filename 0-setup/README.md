@@ -8,7 +8,7 @@ The goal is to ensure all participants begin from the same baseline configuratio
 
 ## Hardware Platform
 
-We will use the Arduino Uno Q running Debian-based Embedded Linux.
+We will use the Arduino Uno Q running Debian-based Embedded Linux®.
 
 Official resources:
 
