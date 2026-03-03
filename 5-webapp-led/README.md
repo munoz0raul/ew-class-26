@@ -31,8 +31,7 @@ In this lab we extend the previous web application by integrating LED control.
 Create and enter a directory:
 
 ```sh
-device:~$ mkdir webapp-led
-device:~$ cd webapp-led
+device:~$ cd 5-webapp-led
 ```
 
 Create the main application file:

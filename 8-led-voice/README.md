@@ -43,8 +43,7 @@ In this lab we use the model exported from Edge Impulse and execute inference lo
 Create and enter a directory:
 
 ```sh
-device:~$ mkdir led-voice
-device:~$ cd led-voice
+device:~$ cd 8-led-voice
 ```
 
 Copy the deployment model into this folder:
@@ -112,10 +111,10 @@ device:~$ docker ps
 Check logs:
 
 ```sh
-device:~$ docker logs led-voice
+device:~$ docker logs -f led-voice
 ```
 
-Speak the trained commands (example: "on", "off") near the microphone.
+Speak the trained commands (example: "green", "blue") near the microphone.
 
 Stop container:
 

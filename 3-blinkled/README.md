@@ -47,7 +47,6 @@ Create and Enter a Directory
 > Run the following commands on the device
 
 ```sh
-device:~$ mkdir blinkled
 device:~$ cd blinkled
 ```
 

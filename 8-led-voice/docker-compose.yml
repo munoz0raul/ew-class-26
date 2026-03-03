@@ -3,6 +3,7 @@ version: "3.9"
 services:
   led-voice:
     image: led-voice:latest
+    container_name: led-voice
     restart: unless-stopped
     privileged: true
     stdin_open: true     # -i

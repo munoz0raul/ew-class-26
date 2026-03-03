@@ -48,8 +48,7 @@ In this lab we combine all previous work into a single system.
 Create and enter directory:
 
 ```sh
-device:~$ mkdir webapp-led-mcu-voice
-device:~$ cd webapp-led-mcu-voice
+device:~$ cd 9-webapp-led-mcu-voice
 ```
 
 Copy model file:

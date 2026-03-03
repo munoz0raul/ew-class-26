@@ -47,7 +47,6 @@ This results in a smaller and cleaner final image.
 Create and enter a directory called `multi`:
 
 ```sh
-device:~$ mkdir multi
 device:~$ cd multi
 ```
 

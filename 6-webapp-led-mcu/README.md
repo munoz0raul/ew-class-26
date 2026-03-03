@@ -44,8 +44,7 @@ In this lab we expand the previous example by integrating MCU communication.
 Create and enter a directory:
 
 ```sh
-device:~$ mkdir webapp-led-mcu
-device:~$ cd webapp-led-mcu
+device:~$ cd 6-webapp-led-mcu
 ```
 
 Create the application file:

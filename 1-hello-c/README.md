@@ -39,7 +39,6 @@ A simple `helloworld.c` program compiled into a container image and executed by 
 ### 1) Create and enter a working directory
 
 ```sh
-device:~$ mkdir hello-c
 device:~$ cd hello-c
 ```
 
@@ -161,7 +160,7 @@ device:~$ docker ps
 Read logs:
 
 ```sh
-device:~$ docker logs <container-name-or-id>
+device:~$ docker logs hello-c
 ```
 
 ---
@@ -169,7 +168,7 @@ device:~$ docker logs <container-name-or-id>
 ## Accessing a running container shell (docker exec)
 
 ```sh
-device:~$ docker exec -it <container-name> /bin/bash
+device:~$ docker exec -it hello-c /bin/bash
 ```
 
 Inside the container:

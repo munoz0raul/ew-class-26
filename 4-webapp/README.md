@@ -34,8 +34,7 @@ In this lab we move from CLI applications to a network-accessible web service.
 Create and enter a directory:
 
 ```sh
-device:~$ mkdir webapp
-device:~$ cd webapp
+device:~$ cd 4-webapp
 ```
 
 Create the web application file:
