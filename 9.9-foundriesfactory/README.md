@@ -131,7 +131,7 @@ On your device, install fioup:
 	sudo apt install fioup
 	```
 
-Verify it is available:
+1. Verify it is available:
 
 ```bash
 fioup --version
