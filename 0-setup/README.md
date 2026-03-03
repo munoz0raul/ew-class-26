@@ -37,6 +37,9 @@ Recommended connection order:
 3. Connect Ethernet cable
 4. Connect power supply
 
+![Kit](assets/kit.jpg)
+
+
 ---
 
 ## Network Connectivity

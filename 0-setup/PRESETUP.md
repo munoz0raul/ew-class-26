@@ -52,6 +52,11 @@ https://docs.arduino.cc/tutorials/uno-q/update-image/
 
 Reflash the board before starting the setup to ensure a clean state.
 
+```sh
+cd ~/Downloads/arduino-flasher-cli-0.5.0-linux-amd64/
+./arduino-flasher-cli flash arduino-unoq-debian-image-20251229-457.tar.zst
+```
+
 ------------------------------------------------------------------------
 
 # 🧰 Initial Setup via ADB
@@ -63,9 +68,7 @@ After flashing, the board requires setting a password.
 Set it to `arduino` (workshop default):
 
 ``` bash
-adb shell "printf '%s
-%s
-' 'arduino' 'arduino' | passwd"
+adb shell "printf '%s\n%s\n' 'arduino' 'arduino' | passwd"
 ```
 
 ------------------------------------------------------------------------
@@ -252,7 +255,7 @@ Via ADB:
 
 ```sh
 adb shell "echo 'arduino' | sudo -S sh -c \"grep -q 'rauls-server' /etc/hosts || echo '192.168.20.10   rauls-server' >> /etc/hosts\""
-adb shell "echo 'arduino' | sudo -S tee /etc/docker/daemon.json >/dev/null <<'EOF'
+adb shell "echo 'arduino' | sudo -S sh -c 'cat > /etc/docker/daemon.json <<\"EOF\"
 {
   \"log-driver\": \"json-file\",
   \"log-opts\": {
@@ -262,7 +265,7 @@ adb shell "echo 'arduino' | sudo -S tee /etc/docker/daemon.json >/dev/null <<'EO
   \"registry-mirrors\": [\"http://rauls-server:5000\"],
   \"insecure-registries\": [\"rauls-server:5000\"]
 }
-EOF"
+EOF'"
 adb shell "echo 'arduino' | sudo -S systemctl restart docker"
 adb shell "echo 'arduino' | sudo -S docker info | grep -i mirror -A2"
 ```
@@ -301,7 +304,7 @@ docker pull python:3
 sudo mkdir -p /etc/X11/xorg.conf.d
 sudo nano /etc/X11/xorg.conf.d/10-monitor.conf
 ```
-
+```sh
     Section "Monitor"
         Identifier "Monitor0"
         Option "DPMS" "false"
@@ -313,6 +316,25 @@ sudo nano /etc/X11/xorg.conf.d/10-monitor.conf
         Option "OffTime" "0"
         Option "BlankTime" "0"
     EndSection
+```
+
+Adb Command:
+
+```sh
+adb shell "echo 'arduino' | sudo -S sh -c 'mkdir -p /etc/X11/xorg.conf.d && cat > /etc/X11/xorg.conf.d/10-monitor.conf <<\"EOF\"
+Section \"Monitor\"
+    Identifier \"Monitor0\"
+    Option \"DPMS\" \"false\"
+EndSection
+
+Section \"ServerFlags\"
+    Option \"StandbyTime\" \"0\"
+    Option \"SuspendTime\" \"0\"
+    Option \"OffTime\" \"0\"
+    Option \"BlankTime\" \"0\"
+EndSection
+EOF'"
+```
 
 ------------------------------------------------------------------------
 
