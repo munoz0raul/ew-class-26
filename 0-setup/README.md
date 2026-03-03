@@ -10,6 +10,8 @@ The goal is to ensure all participants begin from the same baseline configuratio
 
 We will use the Arduino Uno Q running Debian-based Embedded Linux®.
 
+![Arduino Uno Q](assets/uno-q.jpg)
+
 Official resources:
 
 - https://www.arduino.cc/product-uno-q
@@ -51,35 +53,138 @@ ip addr
 
 ---
 
-## SSH Access
+# Device Access Guide -- SSH, ADB, and Serial Console
 
-You will connect to the device remotely via SSH.
+This guide explains all supported ways to access your Arduino UNO Q
+device during the workshop.
 
-### Linux
+You can connect using:
 
-```sh
-ssh USER@DEVICE_IP
+-   SSH (over Wi-Fi / Ethernet)
+-   ADB (over USB)
+-   Serial Console (screen)
+
+------------------------------------------------------------------------
+
+# SSH Access (Network Required)
+
+Use SSH when the device is connected to Wi-Fi or Ethernet and you know
+its IP address.
+
+Default credentials (after setup):
+
+-   User: arduino
+-   Password: fio
+
+------------------------------------------------------------------------
+
+## Linux
+
+Open a terminal and run:
+
+``` sh
+ssh arduino@DEVICE_IP
 ```
 
-### macOS
+Example:
 
-Use Terminal:
-
-```sh
-ssh USER@DEVICE_IP
+``` sh
+ssh arduino@192.168.20.20
 ```
 
-### Windows
+If this is your first time connecting, accept the fingerprint by typing:
 
-Option 1 — Windows Terminal / PowerShell:
-
-```sh
-ssh USER@DEVICE_IP
+``` sh
+yes
 ```
 
-Option 2 — PuTTY
+------------------------------------------------------------------------
 
----
+## macOS
+
+Open Terminal and run:
+
+``` sh
+ssh arduino@DEVICE_IP
+```
+
+Example:
+
+``` sh
+ssh arduino@192.168.20.20
+```
+
+------------------------------------------------------------------------
+
+## Windows
+
+### Option 1 --- Windows Terminal / PowerShell (Recommended)
+
+Modern Windows versions include OpenSSH.
+
+``` sh
+ssh arduino@DEVICE_IP
+```
+
+If SSH is not installed:
+
+-   Go to Settings → Optional Features
+-   Install "OpenSSH Client"
+
+------------------------------------------------------------------------
+
+### Option 2 --- PuTTY
+
+1.  Download PuTTY from: https://www.putty.org/
+
+2.  Open PuTTY
+
+3.  Enter DEVICE_IP
+
+4.  Port: 22
+
+5.  Connection type: SSH
+
+6.  Click Open
+
+Login with:
+
+-   Username: arduino
+-   Password: fio
+
+------------------------------------------------------------------------
+
+# ADB Access (USB Connection)
+
+ADB allows you to access the device directly via USB without network.
+
+## Check if device is detected
+
+``` sh
+adb devices
+```
+
+You should see:
+
+    DEVICE_ID    device
+
+## Open shell
+
+``` sh
+adb shell
+```
+
+## Run a single remote command
+
+``` sh
+adb shell <command>
+```
+
+Example:
+
+``` sh
+adb shell uname -a
+```
 
 ## Debian Console Basics
 
