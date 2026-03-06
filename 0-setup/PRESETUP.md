@@ -1,3 +1,36 @@
+
+
+# 🌐 Booth Router Configuration
+
+## Router Admin Access
+
+Router IP:
+
+    192.168.10.1
+
+Admin Password:
+
+    @Foundries.io@
+
+------------------------------------------------------------------------
+
+## Wi‑Fi Configuration
+
+SSID (2.4GHz):
+
+    Foundries
+
+SSID (5GHz):
+
+    Foundries_5G
+
+Wi‑Fi Password:
+
+    @Foundries123
+
+------------------------------------------------------------------------
+
+
 # Arduino UNO Q -- Workshop Master Setup Guide
 
 This document consolidates all validated working steps used during
@@ -77,6 +110,8 @@ adb shell "printf '%s\n%s\n' 'arduino' 'arduino' | passwd"
 
 ``` bash
 adb shell "nmcli dev wifi connect 'FoundriesWorkshop' password '@FoundriesWorkshop123'"
+
+adb shell "nmcli dev wifi connect 'Foundries' password '@Foundries.io123'"
 ```
 
 Verify:
@@ -369,4 +404,104 @@ chmod +x ./uno_q_provision.sh
 
 # configurar mirror docker + /etc/hosts
 ./uno_q_provision.sh --configure-mirror --server-ip 192.168.20.10 --mirror-host rauls-server
+```
+
+
+
+
+
+
+# Fioup
+
+
+```sh
+sudo apt update
+sudo apt install -y apt-transport-https ca-certificates curl gnupg
+
+
+curl -L https://fioup.foundries.io/pkg/deb/dists/stable/Release.gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/fioup-stable.gpg
+
+echo 'deb [signed-by=/etc/apt/trusted.gpg.d/fioup-stable.gpg] https://fioup.foundries.io/pkg/deb stable main' | sudo tee /etc/apt/sources.list.d/fioup.list
+
+
+sudo apt update
+sudo apt install fioup
+
+sudo mkdir -p /var/sota
+sudo chown -R $USER /var/sota
+
+sudo usermod -aG docker $USER
+
+sudo fioup register --api-token <TOKEN> --factory <FACTORY_NAME> --name <DEVICE_IP> --apps pingpong-webui
+```
+
+
+```sh
+adb shell "echo 'arduino' | sudo -S apt update"
+adb shell "echo 'arduino' | sudo -S apt install -y apt-transport-https ca-certificates curl gnupg"
+adb shell "echo 'arduino' | sudo -S sh -c 'curl -L https://fioup.foundries.io/pkg/deb/dists/stable/Release.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/fioup-stable.gpg'"
+adb shell "echo 'arduino' | sudo -S sh -c \"echo 'deb [signed-by=/etc/apt/trusted.gpg.d/fioup-stable.gpg] https://fioup.foundries.io/pkg/deb stable main' > /etc/apt/sources.list.d/fioup.list\""
+adb shell "echo 'arduino' | sudo -S apt update"
+adb shell "echo 'arduino' | sudo -S apt install -y fioup"
+adb shell "echo 'arduino' | sudo -S mkdir -p /var/sota"
+adb shell "echo 'arduino' | sudo -S chown -R arduino /var/sota"
+adb shell "echo 'arduino' | sudo -S usermod -aG docker arduino"
+adb shell "fioup register --api-token 3afb43511c93da9a31100e181d2b17cf81f61230 --factory demo-2026-arduino --name qualcomm-1 --apps home-ai-webui"
+
+adb shell "echo 'arduino' | sudo -S sed -i '/^\[uptane\]/a polling_seconds = \"10\"' /var/sota/sota.toml"
+adb shell "grep -A3 '^\[uptane\]' /var/sota/sota.toml"
+
+``
+
+Register to demo-ew-class-26
+6bda2775bd62c39a5e9e2eee0f67982fa59803e0
+
+Register demo-2026-arduino
+3afb43511c93da9a31100e181d2b17cf81f61230
+
+
+## Desktop icon
+
+
+```sh
+DESKTOP_FILE="/home/arduino/Desktop/App.desktop"
+mkdir -p "$(dirname "$DESKTOP_FILE")"
+
+cat << 'EOF' > "$DESKTOP_FILE"
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=App
+Comment=
+Exec=chromium --kiosk http://localhost:8000
+Icon=audio-input-microphone
+Path=
+Terminal=false
+StartupNotify=false
+EOF
+
+chmod 644 "$DESKTOP_FILE"
+```
+
+# Auto Start
+
+```sh
+mkdir -p /home/arduino/.config/autostart
+
+cat << 'EOF' > /home/arduino/.config/systemd/user/kiosk.service
+[Unit]
+Description=Kiosk Chromium
+
+[Service]
+ExecStart=chromium --kiosk http://localhost:8000
+Restart=always
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=default.target
+EOF
+
+
+sudo -u arduino systemctl --user daemon-reload
+sudo -u arduino systemctl --user enable kiosk
 ```
