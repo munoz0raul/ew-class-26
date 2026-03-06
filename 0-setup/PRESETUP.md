@@ -486,25 +486,23 @@ chmod 644 "$DESKTOP_FILE"
 # Auto Start
 
 ```sh
-adb shell "mkdir -p /home/arduino/.config/autostart && cat << 'EOF' > /home/arduino/.config/autostart/kiosk.desktop
+adb shell "echo 'arduino' | sudo -S sh -c 'cat > /etc/xdg/autostart/kiosk.desktop <<\"EOF\"
 [Desktop Entry]
 Type=Application
 Name=Kiosk
 Exec=chromium --kiosk http://localhost:8000
 X-GNOME-Autostart-enabled=true
-EOF"
+EOF'"
 ```
 
 ```sh
-mkdir -p /home/arduino/.config/autostart 
-
-cat << 'EOF' > /home/arduino/.config/autostart/kiosk.desktop
+sudo -S sh -c 'cat > /etc/xdg/autostart/kiosk.desktop <<\"EOF\"
 [Desktop Entry]
 Type=Application
 Name=Kiosk
 Exec=chromium --kiosk http://localhost:8000
 X-GNOME-Autostart-enabled=true
-EOF"
+EOF'
 ```
 
 
