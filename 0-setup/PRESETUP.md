@@ -482,6 +482,26 @@ EOF
 chmod 644 "$DESKTOP_FILE"
 ```
 
+```sh
+DESKTOP_FILE="/home/arduino/Desktop/App.desktop"
+mkdir -p "$(dirname "$DESKTOP_FILE")"
+
+cat << 'EOF' > "$DESKTOP_FILE"
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=App
+Comment=
+Exec=chromium --kiosk http://localhost:8000
+Icon=audio-input-microphone
+Path=
+Terminal=false
+StartupNotify=false
+EOF
+
+chmod 644 "$DESKTOP_FILE"
+```
+
 # Auto Start
 
 ```sh
