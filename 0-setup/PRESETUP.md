@@ -288,8 +288,8 @@ adb shell "echo 'arduino' | sudo -S chown -R arduino /var/sota"
 adb shell "echo 'arduino' | sudo -S usermod -aG docker arduino"
 adb shell "fioup register --api-token 3afb43511c93da9a31100e181d2b17cf81f61230 --factory demo-2026-arduino --name qualcomm-1 --apps home-ai-webui"
 
-adb shell "echo 'arduino' | systemctl enable fioup"
-adb shell "echo 'arduino' | ssudo systemctl start fioup"
+adb shell "echo 'arduino' | sudo -S systemctl enable fioup"
+adb shell "echo 'arduino' | sudo -S systemctl start fioup"
 
 adb shell "echo 'arduino' | sudo -S sed -i '/^\[uptane\]/a polling_seconds = \"10\"' /var/sota/sota.toml"
 adb shell "grep -A3 '^\[uptane\]' /var/sota/sota.toml"
