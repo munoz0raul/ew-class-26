@@ -483,10 +483,9 @@ chmod 644 "$DESKTOP_FILE"
 ```
 
 ```sh
-DESKTOP_FILE="/home/arduino/Desktop/App.desktop"
-mkdir -p "$(dirname "$DESKTOP_FILE")"
+adb shell "mkdir -p /home/arduino/Desktop"
 
-cat << 'EOF' > "$DESKTOP_FILE"
+adb shell "cat << 'EOF' > /home/arduino/Desktop/App.desktop
 [Desktop Entry]
 Version=1.0
 Type=Application
@@ -497,10 +496,11 @@ Icon=audio-input-microphone
 Path=
 Terminal=false
 StartupNotify=false
-EOF
+EOF"
 
-chmod 644 "$DESKTOP_FILE"
-```
+adb shell "chmod 644 /home/arduino/Desktop/App.desktop"
+adb shell "chown arduino:arduino /home/arduino/Desktop/App.desktop"
+``` 
 
 # Auto Start
 
