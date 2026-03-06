@@ -191,145 +191,6 @@ adb shell "echo 'arduino' | sudo -S nmcli connection down 'FoundriesWorkshop'"
 adb shell "echo 'arduino' | sudo -S nmcli connection up 'FoundriesWorkshop'"
 ```
 
-------------------------------------------------------------------------
-
-# 🐳 Docker Registry Mirror -- Workshop Setup
-
-## 1️⃣ Server Setup (Laptop)
-
-``` bash
-mkdir registry-mirror
-cd registry-mirror
-```
-
-### config.yml
-
-``` yaml
-version: 0.1
-
-log:
-  level: info
-
-http:
-  addr: 0.0.0.0:5000
-
-storage:
-  filesystem:
-    rootdirectory: /var/lib/registry
-
-proxy:
-  remoteurl: https://registry-1.docker.io
-```
-
-### docker-compose.yml
-
-``` yaml
-services:
-  registry-mirror:
-    image: registry:2
-    container_name: registry-mirror
-    restart: always
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./config.yml:/etc/docker/registry/config.yml:ro
-      - registry-data:/var/lib/registry
-
-volumes:
-  registry-data:
-```
-
-Start:
-
-``` bash
-docker compose up -d
-```
-
-Verify:
-
-``` bash
-curl http://localhost:5000/v2/
-```
-
-Expected:
-
-    {}
-
-------------------------------------------------------------------------
-
-## 2️⃣ Configure Clients
-
-Add to `/etc/hosts`:
-``` sh
-echo "192.168.20.10   rauls-server" | sudo tee -a /etc/hosts >/dev/null
-```
-
-Edit `/etc/docker/daemon.json`:
-
-``` sh
-sudo tee /etc/docker/daemon.json >/dev/null <<'EOF'
-{
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "10m",
-    "max-file": "2"
-  },
-  "registry-mirrors": ["http://rauls-server:5000"],
-  "insecure-registries": ["rauls-server:5000"]
-}
-EOF
-```
-
-Restart Docker:
-
-``` bash
-sudo systemctl restart docker
-```
-
-Via ADB:
-
-```sh
-adb shell "echo 'arduino' | sudo -S sh -c \"grep -q 'rauls-server' /etc/hosts || echo '192.168.20.10   rauls-server' >> /etc/hosts\""
-adb shell "echo 'arduino' | sudo -S sh -c 'cat > /etc/docker/daemon.json <<\"EOF\"
-{
-  \"log-driver\": \"json-file\",
-  \"log-opts\": {
-    \"max-size\": \"10m\",
-    \"max-file\": \"2\"
-  },
-  \"registry-mirrors\": [\"http://rauls-server:5000\"],
-  \"insecure-registries\": [\"rauls-server:5000\"]
-}
-EOF'"
-adb shell "echo 'arduino' | sudo -S systemctl restart docker"
-adb shell "echo 'arduino' | sudo -S docker info | grep -i mirror -A2"
-```
-
-------------------------------------------------------------------------
-
-## 3️⃣ Validate Mirror
-
-On one board:
-
-``` bash
-docker pull debian:trixie-slim
-```
-
-On server:
-
-``` bash
-docker logs -f registry-mirror
-```
-
-------------------------------------------------------------------------
-
-## 4️⃣ Pre-Warm Cache (Before Workshop)
-
-``` bash
-docker pull debian:trixie-slim
-docker pull registry:2
-docker pull python:3
-```
 
 ------------------------------------------------------------------------
 
@@ -337,7 +198,7 @@ docker pull python:3
 
 ``` bash
 sudo mkdir -p /etc/X11/xorg.conf.d
-sudo nano /etc/X11/xorg.conf.d/10-monitor.conf
+sudo vim /etc/X11/xorg.conf.d/10-monitor.conf
 ```
 ```sh
     Section "Monitor"
@@ -387,27 +248,6 @@ EOF'"
 -   Screen sleep disabled
 
 Workshop-ready and validated.
-
-# Script
-
-```sh
-chmod +x ./uno_q_provision.sh
-
-# default (DHCP, SSID FoundriesWorkshop, senha @FoundriesWorkshop123, password arduino)
-./uno_q_provision.sh
-
-# escolher SSID/senha
-./uno_q_provision.sh --ssid FoundriesWorkshop_5G --wifi-pass '@FoundriesWorkshop123'
-
-# IP fixo
-./uno_q_provision.sh --static-ip 192.168.20.20 --gateway 192.168.20.1 --dns 8.8.8.8
-
-# configurar mirror docker + /etc/hosts
-./uno_q_provision.sh --configure-mirror --server-ip 192.168.20.10 --mirror-host rauls-server
-```
-
-
-
 
 
 
@@ -560,3 +400,145 @@ EOF'"
 adb shell "echo 'arduino' | sudo -S reboot"
 ```
 
+
+
+
+------------------------------------------------------------------------
+
+# 🐳 Docker Registry Mirror -- Workshop Setup
+
+## 1️⃣ Server Setup (Laptop)
+
+``` bash
+mkdir registry-mirror
+cd registry-mirror
+```
+
+### config.yml
+
+``` yaml
+version: 0.1
+
+log:
+  level: info
+
+http:
+  addr: 0.0.0.0:5000
+
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+
+proxy:
+  remoteurl: https://registry-1.docker.io
+```
+
+### docker-compose.yml
+
+``` yaml
+services:
+  registry-mirror:
+    image: registry:2
+    container_name: registry-mirror
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./config.yml:/etc/docker/registry/config.yml:ro
+      - registry-data:/var/lib/registry
+
+volumes:
+  registry-data:
+```
+
+Start:
+
+``` bash
+docker compose up -d
+```
+
+Verify:
+
+``` bash
+curl http://localhost:5000/v2/
+```
+
+Expected:
+
+    {}
+
+------------------------------------------------------------------------
+
+## 2️⃣ Configure Clients
+
+Add to `/etc/hosts`:
+``` sh
+echo "192.168.20.10   rauls-server" | sudo tee -a /etc/hosts >/dev/null
+```
+
+Edit `/etc/docker/daemon.json`:
+
+``` sh
+sudo tee /etc/docker/daemon.json >/dev/null <<'EOF'
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "2"
+  },
+  "registry-mirrors": ["http://rauls-server:5000"],
+  "insecure-registries": ["rauls-server:5000"]
+}
+EOF
+```
+
+Restart Docker:
+
+``` bash
+sudo systemctl restart docker
+```
+
+Via ADB:
+
+```sh
+adb shell "echo 'arduino' | sudo -S sh -c \"grep -q 'rauls-server' /etc/hosts || echo '192.168.20.10   rauls-server' >> /etc/hosts\""
+adb shell "echo 'arduino' | sudo -S sh -c 'cat > /etc/docker/daemon.json <<\"EOF\"
+{
+  \"log-driver\": \"json-file\",
+  \"log-opts\": {
+    \"max-size\": \"10m\",
+    \"max-file\": \"2\"
+  },
+  \"registry-mirrors\": [\"http://rauls-server:5000\"],
+  \"insecure-registries\": [\"rauls-server:5000\"]
+}
+EOF'"
+adb shell "echo 'arduino' | sudo -S systemctl restart docker"
+adb shell "echo 'arduino' | sudo -S docker info | grep -i mirror -A2"
+```
+
+------------------------------------------------------------------------
+
+## 3️⃣ Validate Mirror
+
+On one board:
+
+``` bash
+docker pull debian:trixie-slim
+```
+
+On server:
+
+``` bash
+docker logs -f registry-mirror
+```
+
+------------------------------------------------------------------------
+
+## 4️⃣ Pre-Warm Cache (Before Workshop)
+
+``` bash
+docker pull debian:trixie-slim
+docker pull registry:2
+docker pull python:3
+```
