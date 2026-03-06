@@ -451,14 +451,13 @@ adb shell "fioup register --api-token 3afb43511c93da9a31100e181d2b17cf81f61230 -
 adb shell "echo 'arduino' | sudo -S sed -i '/^\[uptane\]/a polling_seconds = \"10\"' /var/sota/sota.toml"
 adb shell "grep -A3 '^\[uptane\]' /var/sota/sota.toml"
 
-``
 
 Register to demo-ew-class-26
 6bda2775bd62c39a5e9e2eee0f67982fa59803e0
 
 Register demo-2026-arduino
 3afb43511c93da9a31100e181d2b17cf81f61230
-
+```
 
 ## Desktop icon
 
@@ -514,4 +513,30 @@ adb shell "echo 'arduino' | sudo -S rm /etc/xdg/autostart/ArduinoAppLab.desktop"
 
 ```
 
+## Auto Login
+
+
+```sh
+sudo mkdir -p /etc/lightdm/lightdm.conf.d
+
+sudo tee /etc/lightdm/lightdm.conf.d/50-autologin.conf >/dev/null <<'EOF'
+[Seat:*]
+autologin-user=arduino
+autologin-user-timeout=0
+EOF
+
+sudo reboot
+```
+
+```sh
+adb shell "echo 'arduino' | sudo -S mkdir -p /etc/lightdm/lightdm.conf.d"
+
+adb shell "echo 'arduino' | sudo -S sh -c 'cat > /etc/lightdm/lightdm.conf.d/50-autologin.conf <<\"EOF\"
+[Seat:*]
+autologin-user=arduino
+autologin-user-timeout=0
+EOF'"
+
+adb shell "echo 'arduino' | sudo -S reboot"
+```
 
