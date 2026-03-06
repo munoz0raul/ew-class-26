@@ -496,11 +496,11 @@ EOF'"
 ```
 
 ```sh
-sudo -S sh -c 'cat > /etc/xdg/autostart/kiosk.desktop <<\"EOF\"
+sudo sh -c 'cat > /etc/xdg/autostart/kiosk.desktop << "EOF"
 [Desktop Entry]
 Type=Application
 Name=Kiosk
-Exec=chromium --kiosk http://localhost:8000
+Exec=chromium --kiosk --noerrdialogs --disable-infobars http://localhost:8000
 X-GNOME-Autostart-enabled=true
 EOF'
 ```
