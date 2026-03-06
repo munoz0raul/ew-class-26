@@ -486,22 +486,34 @@ chmod 644 "$DESKTOP_FILE"
 # Auto Start
 
 ```sh
-mkdir -p /home/arduino/.config/autostart
-
-cat << 'EOF' > /home/arduino/.config/systemd/user/kiosk.service
-[Unit]
-Description=Kiosk Chromium
-
-[Service]
-ExecStart=chromium --kiosk http://localhost:8000
-Restart=always
-Environment=DISPLAY=:0
-
-[Install]
-WantedBy=default.target
-EOF
-
-
-sudo -u arduino systemctl --user daemon-reload
-sudo -u arduino systemctl --user enable kiosk
+adb shell "mkdir -p /home/arduino/.config/autostart && cat << 'EOF' > /home/arduino/.config/autostart/kiosk.desktop
+[Desktop Entry]
+Type=Application
+Name=Kiosk
+Exec=chromium --kiosk http://localhost:8000
+X-GNOME-Autostart-enabled=true
+EOF"
 ```
+
+```sh
+mkdir -p /home/arduino/.config/autostart 
+
+cat << 'EOF' > /home/arduino/.config/autostart/kiosk.desktop
+[Desktop Entry]
+Type=Application
+Name=Kiosk
+Exec=chromium --kiosk http://localhost:8000
+X-GNOME-Autostart-enabled=true
+EOF"
+```
+
+
+## DISABLE APPLABS
+
+```sh
+
+adb shell "echo 'arduino' | sudo -S rm /etc/xdg/autostart/ArduinoAppLab.desktop"
+
+```
+
+
