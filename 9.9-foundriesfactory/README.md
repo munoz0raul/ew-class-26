@@ -167,6 +167,9 @@ The host/device is now ready for registration with your Factory:
 
 ```bash
 sudo fioup register --api-token <TOKEN> --factory <FACTORY_NAME> --name <DEVICE_IP> --apps pingpong-webui
+
+sudo fioup register --api-token 6bda2775bd62c39a5e9e2eee0f67982fa59803e0 --factory demo-ew-class-26 --name <DEVICE-NAME> --apps pingpong-webui
+
 ```
 
 After registration, your device should appear online in the FoundriesFactory™ dashboard.
