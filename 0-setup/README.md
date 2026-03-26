@@ -77,7 +77,7 @@ its IP address.
 Default credentials (after setup):
 
 -   User: arduino
--   Password: arduino
+-   Password: fio
 
 ------------------------------------------------------------------------
 
